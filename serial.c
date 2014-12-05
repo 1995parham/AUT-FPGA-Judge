@@ -4,7 +4,7 @@
 // 
 // * Creation Date : 03-12-2014
 //
-// * Last Modified : Fri 05 Dec 2014 08:04:34 AM IRST
+// * Last Modified : Fri 05 Dec 2014 12:27:39 PM IRST
 //
 // * Created By : Parham Alvani (parham.alvani@gmail.com)
 // =======================================
@@ -20,11 +20,13 @@
 #include <sys/types.h>
 
 #include "serial.h"
+#include "common.h"
 
 static const char* serial_dev[2] = {"/dev/ttyS0", "/dev/ttyS1"};
-int serial_dev_fd[2];	// This array visible to others file, os after init_srial it is going to be usable.
+int serial_fd[2];	// This array visible to others file, so after init_srial it is going to be usable.
 static struct termios oldtio[2], tio[2];
 int on_serial = 0;	// Before call init_serial you set it to the number of serial port is going to be used. 
+char team_ids[2][3] = {"01", "02"};
 
 void init_serial(){
 	int p;
@@ -42,8 +44,7 @@ void init_serial(){
 	for (p = 0; p < ports; p++){
       		serial_fd[p] = open(serial_dev[p], O_RDWR | O_NOCTTY | O_NDELAY);
       		if(serial_fd[p] < 0 ){
-			perror("open_port: Unable to open /dev/ttyS%d - ", p);
-			exit(-1);
+			die("open_port: Unable to open /dev/ttyS%d - ", p);
       		}
    		// Set serial port options 
       		tcgetattr(serial_fd[p], &oldtio[p]); // Backup port settings
@@ -57,23 +58,22 @@ void init_serial(){
       		tio[p].c_cflag |= CREAD;	// Enable reciever
 
       		tcsetattr(serial_fd[p], TCSANOW, &tio[p]);
-      		tcflush(serial_fd[p], TCIOFLUSH);
-	}
-	// flush 
-	write(serial_fd[p], init_code, strlen(init_code));
+      		tcflush(serial_fd[p], TCIOFLUSH);}
+		
+		// flush 
+		write(serial_fd[p], init_code, strlen(init_code));
 	
-	// at least 30s timeout for game initialization
-	temp_timeout = move_timeout;
-	if(move_timeout < 30) move_timeout = 30;
+		// at least 30s timeout for game initialization
+		temp_timeout = move_timeout;
+		if(move_timeout < 30) move_timeout = 30;
 	
-	if(read_all(serial_fd[p], 3, team_id) != 3){
-		printf("Timeout while waiting team code on serial port %d!\n", p);
-		exit(-1);
+		if(read_all(serial_fd[p], 3, team_id[p]) != 3){
+			printf("Timeout while waiting team code on serial port %d!\n", p);
+			exit(-1);
+		}
+		printf("Team code on erial %d: %s\n", p, &team_id[p]);
+		move_timeout = temp_timeout; // restore
 	}
-	team_id[3] = 0;
-	printf("Team code on serial %d: %s\n", p, &team_id[1]);
-	strncpy(team_ids[ ((on_serial==2) ? 1 : p) ], &team_id[1], 2);
-	move_timeout = temp_timeout; // restore
 }
 
 int read_all(int fd, int len, char* buffer);
