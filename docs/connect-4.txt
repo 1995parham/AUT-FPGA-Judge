@@ -1,0 +1,34 @@
+In the name of god
+==============================================================================
+Connect-4:
+ this game in simplest form has Knowledge-Based approach solution, the solution to the game was explained mathematically and a computer solution devised by James D. Allen on 1 October 1988, 
+and completely separartely by Victor Allis on 16 October 1988.
+ These programs devised from these algorithms are so good that a computer can force a win every time if it starts the middle column. It can also win most games when it starts second. These 
+solutions are quite complex and James Allen did his Masters Degree on the problem.
+ So problem is hard enough to challenge students. but it is not fair enough becuase it has some sort of strategies.
+
+*1*. Always start in the middle. If you start first, always start in the middle. It is always the best strategy and it will give you more wins.
+If you go second, then add your disk directly on top of the centre disk if you opponent plays there or to either of the two columns directly beside centre primarily for defence. 
+Playing on top of your opponent or beside his/her disk is best otherwise your opponent has a chance build either a two-in-a-row diagonal, or a two-in-a-row horizontal which gives them an 
+advantage.
+
+*2*. The centre area is obviously where most of the winning combinations are found because there are more chances of building winning 4-in-a-row lines. As a result, the middle squares are 
+more valuable.
+
+*3*. Surround to conquer your opponent. If your opponent is building in the centre or building a core group, try and cover his/her outs by adding blocking disks on top of him.
+However be observant and stop our opponent building horizontal three-in-a-row sequences. Try to stay on the offensive if you can, but defend when necessary.
+
+*4*. Always look out for force wins or force losses. Look out for your opponent trying to make a three-in-a-row diagonal directly linked to a three-in-a-row horizontal,
+which is a winning combination. This is an excellent strategy as it forces you to block one winning space, only to lose on the next turn. 
+Think well ahead on each of your turns and see how you can reverse the position.
+
+*5*. Forced moves can often give you a winning position. Building 3-in-a-row vertically will seldom not be seen by your opponent. They will have no option but to block it, 
+or else they will lose. This means that they will effectively lose a chance to build a winning position by blocking you. But you will have 3 of your pieces all stacked together, 
+which can be readily built next to, and you will now have many ways to branch out. You opponent will face a difficult job blocking off all your paths as a result, 
+and this puts you in a good position for a win.
+
+*6*. Try to kill off columns when you are behind. Often when you start second you will feel like you are always defending. To make things easier, try getting a 3-in-a-row combination in either the 6th or 2nd columns. You will reduce he options and may disrupt your opponent's strategy. If they try to stop you from blocking column, they will waste moves and give you to go on the offensive.
+
+*7*. When your get a chance count the spots left on the board. Towards the end of the game, hen you get a chance, count the spots to see who is going to go where when you have to place 
+disks in dead columns. Counting the spots will help you see if you are going to block your chances or will give your opponent an easy win. If you count remaining spots, and see that you 
+are going to win, play defensive and work on using the dead columns to get a chance to win.
