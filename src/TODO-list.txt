@@ -1,0 +1,4 @@
+1. remove team number reader from init_serial()[serial.c]
+2. create object for handling start and end the game
+3. add start and end command in coomand_dispatcher
+4. add log file
