@@ -4,15 +4,18 @@
 // 
 // * Creation Date : 05-12-2014
 //
-// * Last Modified : Fri 05 Dec 2014 12:26:53 PM IRST
+// * Last Modified : Sat 06 Dec 2014 11:41:25 PM IRST
 //
 // * Created By : Parham Alvani (parham.alvani@gmail.com)
 // =======================================
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <sys/select.h>
+
 #define MAX_BUFF 1000 * 1000
 
 void die(const char *fmt, ...);
 
+int timeval_subtract(const struct timeval *a, const struct timeval *b);	// return a - b in milliseconds   
 #endif

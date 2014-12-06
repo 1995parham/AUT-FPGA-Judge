@@ -4,7 +4,7 @@
 // 
 // * Creation Date : 05-12-2014
 //
-// * Last Modified : Fri 05 Dec 2014 12:28:29 PM IRST
+// * Last Modified : Sat 06 Dec 2014 11:41:36 PM IRST
 //
 // * Created By : Parham Alvani (parham.alvani@gmail.com)
 // =======================================
@@ -13,6 +13,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/select.h>
 
 #include "common.h"
 
@@ -26,5 +27,9 @@ void die(const char *fmt, ...){
 
 	perror(buf);
 	exit(EXIT_FAILURE);
+}
+
+int timeval_subtract(const struct timeval *a, const struct timeval *b){
+	return (a->tv_usec - b->tv_usec) / 1000 + (a->tv_sec - b->tv_sec) * 1000;
 }
 
