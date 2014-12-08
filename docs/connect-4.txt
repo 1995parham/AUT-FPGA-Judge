@@ -32,3 +32,9 @@ and this puts you in a good position for a win.
 *7*. When your get a chance count the spots left on the board. Towards the end of the game, hen you get a chance, count the spots to see who is going to go where when you have to place 
 disks in dead columns. Counting the spots will help you see if you are going to block your chances or will give your opponent an easy win. If you count remaining spots, and see that you 
 are going to win, play defensive and work on using the dead columns to get a chance to win.
+====================================================================================
+Some useful links:
+[http://www.wikihow.com/Win-at-Connect-4]
+[http://homepages.cwi.nl/~tromp/c4.html]
+[http://homepages.cwi.nl/~tromp/c4/c4.html]
+(*)The Complete Book of Connect 4
