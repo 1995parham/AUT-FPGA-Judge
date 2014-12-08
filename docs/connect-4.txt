@@ -38,3 +38,5 @@ Some useful links:
 [http://homepages.cwi.nl/~tromp/c4.html]
 [http://homepages.cwi.nl/~tromp/c4/c4.html]
 (*)The Complete Book of Connect 4
+=====================================================================================
+upper bound complexity = 7.1 * 10^13
