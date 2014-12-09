@@ -1,0 +1,10 @@
+In the name of god
+=========================
+[http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=6133249&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6133249]
+Recently, immediately following invention of a Connect6 game, many game programs were developed aggressively. However, because the solution space of the Connect6 game is extremely large,
+the computation powers of current computers are quite insufficient to search all possible solutions. This paper therefore presents a proposal of a field programmable gate array (FPGA) 
+Connect6 Solver with a two-stage pipelined evaluation exploiting numerous zero-evaluation functions to evaluate only a zero value and a small number of detailed evaluation functions which
+can evaluate all range. The FPGA Connect6 Solver implemented onto a Cyclone IV FPGA is able to defeat target software provided by the 2011 International Conference on Field-Programmable
+Technology (ICFPT) within the time limit of 1 s for each turn. In addition, the FPGA Connect6 Solver can defeat another JAVA-based software program with a similar algorithm. 
+At that time, the operation speed of the FPGA Connect6 Solver is 764.2 times higher than that of the software operating on a personal computer
+(Vostro 220S; Dell Inc.) with a 3.16 GHz, Core 2 Duo processor (Intel Corp.).

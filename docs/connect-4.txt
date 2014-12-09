@@ -36,7 +36,7 @@ are going to win, play defensive and work on using the dead columns to get a cha
 Some useful links:
 [http://www.wikihow.com/Win-at-Connect-4]
 [http://homepages.cwi.nl/~tromp/c4.html]
-[http://homepages.cwi.nl/~tromp/c4/c4.html]
+[http://en.wikipedia.org/wiki/Connect6]
 (*)The Complete Book of Connect 4
 =====================================================================================
 upper bound complexity = 7.1 * 10^13
