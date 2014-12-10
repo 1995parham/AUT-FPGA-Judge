@@ -1,0 +1,20 @@
+In the name of god
+==========================
+
+[https://github.com/mlindgren/UNBC-CPSC101-Score-Four]
+ In this project game AI implemented in java
+
+[https://github.com/ttsiodras/Score4]
+ In this project connect-4 game AI implemented in java, This project isn't really score4 game.
+
+[http://users.softlab.ece.ntua.gr/~ttsiod/score4.html]
+ In this article author explain AI for connect-4 game based on alpha-beta pruning, This article does not explain score4 AI.
+
+[https://github.com/operatorequals/Score4]
+ Empty project
+
+[http://murphy.wot.eecs.northwestern.edu/~msh986/349ml]
+ In this article author explain some AI mehtod whitout implementation.
+
+[http://intensecomputers.com/portfolio/scorfor/ScorFor.html]
+ Two player (without AI) score4 game web implemetation.

@@ -40,3 +40,5 @@ Some useful links:
 (*)The Complete Book of Connect 4
 =====================================================================================
 upper bound complexity = 7.1 * 10^13
+
+**At the end because of ............ we cannot use this game**
