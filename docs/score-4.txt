@@ -18,3 +18,9 @@ In the name of god
 
 [http://intensecomputers.com/portfolio/scorfor/ScorFor.html]
  Two player (without AI) score4 game web implemetation.
+
+[http://pressibus.org/ataxx/autre/minimax/node2.html]
+ In this article author explain minmax tree, alpha-beta pruning with psuedocode.
+
+[http://roadtolarissa.com/connect-4-ai-how-it-works]
+ In this article author explain connect-4 game AI.
