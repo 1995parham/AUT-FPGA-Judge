@@ -4,7 +4,7 @@
 // 
 // * Creation Date : 03-12-2014
 //
-// * Last Modified : Sat 06 Dec 2014 11:51:39 PM IRST
+// * Last Modified : Tue 16 Dec 2014 01:05:48 PM IRST
 //
 // * Created By : Parham Alvani (parham.alvani@gmail.com)
 // =======================================
@@ -22,9 +22,13 @@
 #include "serial.h"
 #include "common.h"
 
+int on_serial; 
+int serial_fd[2];
+int move_timeout;
+
 static const char* serial_dev[2] = {"/dev/ttyS0", "/dev/ttyS1"};
 static struct termios oldtio[2], tio[2];
-char team_ids[2][3] = {"01", "02"};
+static char team_ids[2][3] = {"01", "02"};
 
 void init_serial(){
 	int p;
@@ -38,7 +42,7 @@ void init_serial(){
 	if (on_serial == 0) return;
 	if (on_serial == 1) ports = 1;
 	if (on_serial == 2) ports = 2;
-  
+
 	for (p = 0; p < ports; p++){
       		serial_fd[p] = open(serial_dev[p], O_RDWR | O_NOCTTY | O_NDELAY);
       		if(serial_fd[p] < 0 ){

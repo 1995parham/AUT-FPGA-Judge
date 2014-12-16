@@ -16,4 +16,4 @@ clean:
 	rm FPGA-Judge $(OBJ)
 .PHONY: archive
 archive:
-
+	tar cvfz FPGA-Judge.tgz *.c *.h
