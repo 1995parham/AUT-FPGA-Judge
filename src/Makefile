@@ -9,7 +9,7 @@ serial.o: serial.c serial.h common.h
 	gcc $(CFLAGS) -c serial.c
 common.o: common.h common.c
 	gcc $(CFLAGS) -c common.c
-command.o: command.h command.c common.h
+command.o: command.h command.c common.h serial.h
 	gcc $(CFLAGS) -c command.c
 .PHONY: clean
 clean:
