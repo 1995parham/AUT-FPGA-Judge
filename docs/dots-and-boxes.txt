@@ -1,9 +1,9 @@
 In the name of god
 ==================================================
-2.Dots and Boxes
- In the game of Dots and Boxes, the winner is generally the player who makes the last move. The reason for this is that at the end of the game, there are usually a few long corridors or chains
-of boxes left to be taken. If your opponent is forced to play in one of these chains, then you can take all but two of the boxes and, by sacrificing the last two boxes, make certain that it is
-his turn to play into the next long chain. You will thus win all but two boxes in each long chain, and of course you will win all boxes in the last chain. We say a chain is long if it contains
+Dots and Boxes:
+ In the game of Dots and Boxes, the winner is generally the player who makes the last move.The reason for this is that at the end of the game, there are usually a few long corridors or chains
+of boxes left to be taken.If your opponent is forced to play in one of these chains, then you can take all but two of the boxes and, by sacrificing the last two boxes, make certain that it is
+his turn to play into the next long chain.You will thus win all but two boxes in each long chain, and of course you will win all boxes in the last chain. We say a chain is long if it contains
 at least three boxes.
 
  The above program [http://www.math.ucla.edu/~tom/Games/dots&boxes.html] for playing Dots and Boxes uses an algorithm that is not very good, but it will play well once there are only long
@@ -16,3 +16,14 @@ of long chains odd. If either m or n is odd, then the first player should play t
  Of course then the second player wants an even number of long chains if both m and n are even, and an odd number of long chains otherwise.
 
  It must be pointed out that in this rule, loops do not count as long chains. 
+=====================================================
+Some useful links:
+[http://en.wikipedia.org/wiki/Dots_and_Boxes]
+[https://github.com/stained/dots-and-boxes]
+ Incomplete android version of dots-and-boxes game.
+[https://github.com/bubbafat/Dots-and-Boxes-Game]
+ Complete C# version of dots-and-boxes game with AI. 
+[https://tkw1536.github.io/DotsAndBoxes]
+ Two player (without AI) dots-and-boxes game web implemetation.
+[https://bitbucket.org/dotsandboxes/dotsandboxes]
+ Complete Java version of dost-and-boxes
