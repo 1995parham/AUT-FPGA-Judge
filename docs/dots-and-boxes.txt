@@ -24,6 +24,8 @@ Some useful links:
 [https://github.com/bubbafat/Dots-and-Boxes-Game]
  Complete C# version of dots-and-boxes game with AI. 
 [https://tkw1536.github.io/DotsAndBoxes]
- Two player (without AI) dots-and-boxes game web implemetation.
+ Two player (without AI) dots-and-boxes game web implementation.
 [https://bitbucket.org/dotsandboxes/dotsandboxes]
  Complete Java version of dost-and-boxes
+[http://dotsandboxes.org/]
+ Two player (with AI) dots-and-boxes game web implementation and good documentations.
