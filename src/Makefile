@@ -1,19 +1,33 @@
-OBJ=serial.o common.o main.o command.o
-CFLAGS=-Wall
+# In The Name Of God
+# ========================================
+# [] File Name : Makefile
+#
+# [] Creation Date : 24-02-2015
+#
+# [] Created By : Parham Alvani (parham.alvani@gmail.com)
+# =======================================
 
-FPGA-Judge: $(OBJ)
-	gcc $(CFLAGS) -o FPGA-Judge $(OBJ)
-main.o:	main.c common.h command.h
-	gcc $(CFLAGS) -c main.c
-serial.o: serial.c serial.h common.h
-	gcc $(CFLAGS) -c serial.c
-common.o: common.h common.c
-	gcc $(CFLAGS) -c common.c
-command.o: command.h command.c common.h serial.h
-	gcc $(CFLAGS) -c command.c
+P=FPGA-Judge
+OBJ=main.o common.o serial.o command.o
+LIB=
+MLIB=
+
+ifdef LIB
+CFLAGS=-Wall -O0 -g -std=gnu11 \
+       $(shell pkg-config --cflags $(LIB))
+LDLIBS=$(shell pkg-config --libs $(LIB)) $(MLIB)
+else
+CFLAGS=-Wall -O0 -g -std=gnu11
+LDLIBS=$(MLIB)
+endif
+ASFLAGS=-Wall -O0 -g
+
+$(P): $(OBJ)
+	$(CC) -o $(P) $(OBJ) $(LDLIBS)
+main.o: command.h common.h
+commnad.o: commnand.h common.h serial.h
+common.o: common.h
+
 .PHONY: clean
 clean:
-	rm FPGA-Judge $(OBJ)
-.PHONY: archive
-archive:
-	tar cvfz FPGA-Judge.tgz *.c *.h
+	rm $(OBJ) $(P)
