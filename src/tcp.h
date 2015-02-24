@@ -1,10 +1,12 @@
-// In The Name Of God
-// ========================================
-// * File Name : tcp.h
-// 
-// * Creation Date : 05-12-2014
-//
-// * Last Modified : Fri 05 Dec 2014 08:04:38 AM IRST
-//
-// * Created By : Parham Alvani (parham.alvani@gmail.com)
-// =======================================
+/*
+ * In The Name Of God
+ * ========================================
+ * [] File Name : tcp.h
+ *
+ * [] Creation Date : 24-02-2015
+ *
+ * [] Last Modified : Tue 24 Feb 2015 10:27:56 PM IRST
+ *
+ * [] Created By : Parham Alvani (parham.alvani@gmail.com)
+ * =======================================
+*/
