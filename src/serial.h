@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Wed 25 Feb 2015 09:11:22 AM IRST
+ * [] Last Modified : Wed 25 Feb 2015 09:20:28 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -17,7 +17,10 @@ extern int move_timeout;
 
 void init_serial(void);
 
-/* Read len bytes from fd, but without CR and LF */
-int read_all(int fd, int len, char *buff);
+/*
+ * Read len bytes from fd, but without CR and LF
+ * in Specified time interval
+*/
+int timed_read(int fd, int len, char *buff);
 
 #endif

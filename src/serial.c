@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Wed 25 Feb 2015 09:16:14 AM IRST
+ * [] Last Modified : Wed 25 Feb 2015 09:19:17 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -13,10 +13,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <termios.h>
 #include <string.h>
 #include <stdint.h>
+#include <unistd.h>
+#include <termios.h>
 #include <fcntl.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -70,7 +70,7 @@ void init_serial(void)
 	move_timeout = temp_timeout; /* restore */
 }
 
-int read_all(int fd, int len, char *buffer)
+int timed_read(int fd, int len, char *buffer)
 {
 	int got = 0;
 	struct timeval start, timelimit, stop;
