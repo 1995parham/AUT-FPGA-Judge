@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 24 Feb 2015 10:29:42 PM IRST
+ * [] Last Modified : Wed 25 Feb 2015 09:11:49 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -33,7 +33,6 @@ void quit_command(void)
 
 void init_command(void)
 {
-	on_serial = 2;
 	init_serial();
 }
 

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 24 Feb 2015 11:03:46 PM IRST
+ * [] Last Modified : Wed 25 Feb 2015 09:16:14 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -24,63 +24,50 @@
 #include "serial.h"
 #include "common.h"
 
-int on_serial;
-int serial_fd[2];
+int serial_fd;
 int move_timeout;
 
-static const char *serial_dev[2] = {"/dev/ttyS0", "/dev/ttyS1"};
-static struct termios oldtio[2], tio[2];
-static char team_ids[2][3] = {"01", "02"};
+static const char *serial_dev = "/dev/ttyS0";
+static struct termios oldtio, tio;
 
 void init_serial(void)
 {
-	int p;
-	int ports = 1;
-
 	const char init_code[2] = "0";
 	char team_id[4];
 
 	int temp_timeout;
 
-	if (on_serial == 0)
-		return;
-	if (on_serial == 1)
-		ports = 1;
-	if (on_serial == 2)
-		ports = 2;
+	serial_fd = open(serial_dev, O_RDWR | O_NOCTTY | O_NDELAY);
+	if (serial_fd <= 0)
+		sdie("Unable to open %s - ", serial_dev);
 
-	for (p = 0; p < ports; p++) {
-		serial_fd[p] = open(serial_dev[p], O_RDWR | O_NOCTTY | O_NDELAY);
-		if(serial_fd[p] < 0)
-			sdie("Unable to open /dev/ttyS%d - ", p);
+	/* Set serial port options */
+	tcgetattr(serial_fd, &oldtio); /* Backup port settings */
+	tcflush(serial_fd, TCIOFLUSH);
 
-		/* Set serial port options */
-		tcgetattr(serial_fd[p], &oldtio[p]); /* Backup port settings */
-		tcflush(serial_fd[p], TCIOFLUSH);
+	memset(&tio, 0, sizeof(tio));
+	cfsetispeed(&tio, B115200);
+	cfsetospeed(&tio, B115200);
+	tio.c_cflag |= CS8;	/* 8 data bits */
+	tio.c_cflag |= CLOCAL;	/* local connection, no modem control */
+	tio.c_cflag |= CREAD;	/* Enable reciever */
 
-		memset(&tio[p], 0, sizeof(tio[p]));
-		cfsetispeed(&tio[p], B115200);
-		cfsetospeed(&tio[p], B115200);
-		tio[p].c_cflag |= CS8;		/* 8 data bits */
-		tio[p].c_cflag |= CLOCAL;	/* local connection, no modem control */
-		tio[p].c_cflag |= CREAD;	/* Enable reciever */
+	tcsetattr(serial_fd, TCSANOW, &tio);
+	tcflush(serial_fd, TCIOFLUSH);
 
-		tcsetattr(serial_fd[p], TCSANOW, &tio[p]);
-		tcflush(serial_fd[p], TCIOFLUSH);
+	/* flush */
+	write(serial_fd, init_code, strlen(init_code));
 
-		/* flush */
-		write(serial_fd[p], init_code, strlen(init_code));
+	/* at least 30s timeout for game initialization */
+	temp_timeout = move_timeout;
+	if (move_timeout < 30)
+		move_timeout = 30;
 
-		/* at least 30s timeout for game initialization */
-		temp_timeout = move_timeout;
-		if(move_timeout < 30) move_timeout = 30;
+	if (read_all(serial_fd, 3, team_id) != 3)
+		udie("Timeout while waiting on serial port %s\n", serial_dev);
 
-		if(read_all(serial_fd[p], 3, &team_id[p]) != 3)
-			udie("Timeout while waiting team code on serial port %d!\n", p);
-
-		printf("Team code on serial %d: %s\n", p, &team_id[p]);
-		move_timeout = temp_timeout; /* restore */
-	}
+	printf("Team code on serial %s: %s\n", serial_dev, team_id);
+	move_timeout = temp_timeout; /* restore */
 }
 
 int read_all(int fd, int len, char *buffer)
@@ -114,23 +101,27 @@ int read_all(int fd, int len, char *buffer)
 
 		FD_ZERO(&read_fds);
 		FD_SET(fd, &read_fds);
-		if(select(fd + 1, &read_fds, &write_fds, &except_fds, &timeout) == 1){
+		if (select(fd + 1, &read_fds, &write_fds,
+					&except_fds, &timeout) == 1) {
 			read(fd, &buffer[got], 1);
-		}else{
+		} else {
 			printf("timeout!\n");
 			got = 0;
-			break; // timeout
+			/* timeout */
+			break;
 		}
 
-		if(buffer[got] != 0x0d && buffer[got] != 0x0a)	// Ignore LF and CR
+		/* Ignore LF and CR */
+		if (buffer[got] != 0x0d && buffer[got] != 0x0a)
 			got++;
 
-	} while(got < len);
+	} while (got < len);
 
 	gettimeofday(&stop, NULL);
 
 	#ifdef DEBUG
-		fprintf(stderr, "read %d bytes in %d msec.\n", got, timeval_subtract(&stop, &start));
+		fprintf(stderr, "read %d", got);
+		printf(" bytes in %d msec.\n", timeval_subtract(&stop, &start));
 	#endif
 
 	return got;
