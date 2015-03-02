@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 12:01:03 AM IRST
+ * [] Last Modified : Tue 03 Mar 2015 01:51:46 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -44,10 +44,7 @@ void init_serial(void)
 	TEST_FD();
 
 	struct termios oldtio, tio;
-	const char init_code[2] = "0";
-	char team_id[255];
-
-	int temp_timeout;
+	const char *init_code = "0";
 
 	/* ** Set serial port options ** */
 
@@ -73,18 +70,11 @@ void init_serial(void)
 	write(fd, init_code, strlen(init_code));
 
 	/* at least 60s timeout for game initialization */
-	temp_timeout = move_timeout;
 	if (move_timeout < 60)
 		move_timeout = 60;
-
-	if (timed_read(3, team_id) != 3)
-		udie("Timeout while waiting on serial port\n");
-
-	printf("Team code on serial %d: %s\n", fd, team_id);
-	move_timeout = temp_timeout; /* restore */
 }
 
-int timed_read(int len, char *buffer)
+int timed_readline(char *buffer)
 {
 	TEST_FD();
 	
@@ -123,13 +113,9 @@ int timed_read(int len, char *buffer)
 			got = 0;
 			/* timeout */
 			break;
-		}
+		}	
 
-		/* Ignore LF and CR */
-		if (buffer[got] != 0x0d && buffer[got] != 0x0a)
-			got++;
-
-	} while (got < len);
+	} while (buffer[got] != 0x0a);
 
 	gettimeofday(&stop, NULL);
 
