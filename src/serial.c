@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Wed 25 Feb 2015 09:19:17 AM IRST
+ * [] Last Modified : Tue 03 Mar 2015 12:01:03 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -24,54 +24,70 @@
 #include "serial.h"
 #include "common.h"
 
-int serial_fd;
-int move_timeout;
+static int move_timeout;
+static int fd;
 
-static const char *serial_dev = "/dev/ttyS0";
-static struct termios oldtio, tio;
+void open_serial(const char *dev)
+{
+	fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
+	if (fd <= 0)
+		sdie("Unable to open %s - ", dev);
+}
+
+void set_timeout(int timeout)
+{
+	move_timeout = timeout;
+}
 
 void init_serial(void)
 {
+	TEST_FD();
+
+	struct termios oldtio, tio;
 	const char init_code[2] = "0";
-	char team_id[4];
+	char team_id[255];
 
 	int temp_timeout;
 
-	serial_fd = open(serial_dev, O_RDWR | O_NOCTTY | O_NDELAY);
-	if (serial_fd <= 0)
-		sdie("Unable to open %s - ", serial_dev);
+	/* ** Set serial port options ** */
 
-	/* Set serial port options */
-	tcgetattr(serial_fd, &oldtio); /* Backup port settings */
-	tcflush(serial_fd, TCIOFLUSH);
+	/* Backup port settings */
+	tcgetattr(fd, &oldtio);
+	tcflush(fd, TCIOFLUSH);
 
 	memset(&tio, 0, sizeof(tio));
+
 	cfsetispeed(&tio, B115200);
 	cfsetospeed(&tio, B115200);
-	tio.c_cflag |= CS8;	/* 8 data bits */
-	tio.c_cflag |= CLOCAL;	/* local connection, no modem control */
-	tio.c_cflag |= CREAD;	/* Enable reciever */
+	/* 8 data bits */
+	tio.c_cflag |= CS8;
+	/* local connection, no moden control */
+	tio.c_cflag |= CLOCAL;
+	/* enable reciever */
+	tio.c_cflag |= CREAD;
 
-	tcsetattr(serial_fd, TCSANOW, &tio);
-	tcflush(serial_fd, TCIOFLUSH);
+	tcsetattr(fd, TCSANOW, &tio);
+	tcflush(fd, TCIOFLUSH);
 
 	/* flush */
-	write(serial_fd, init_code, strlen(init_code));
+	write(fd, init_code, strlen(init_code));
 
-	/* at least 30s timeout for game initialization */
+	/* at least 60s timeout for game initialization */
 	temp_timeout = move_timeout;
-	if (move_timeout < 30)
-		move_timeout = 30;
+	if (move_timeout < 60)
+		move_timeout = 60;
 
-	if (read_all(serial_fd, 3, team_id) != 3)
-		udie("Timeout while waiting on serial port %s\n", serial_dev);
+	if (timed_read(3, team_id) != 3)
+		udie("Timeout while waiting on serial port\n");
 
-	printf("Team code on serial %s: %s\n", serial_dev, team_id);
+	printf("Team code on serial %d: %s\n", fd, team_id);
 	move_timeout = temp_timeout; /* restore */
 }
 
-int timed_read(int fd, int len, char *buffer)
+int timed_read(int len, char *buffer)
 {
+	TEST_FD();
+	
 	int got = 0;
 	struct timeval start, timelimit, stop;
 	fd_set read_fds, write_fds, except_fds;
@@ -92,9 +108,7 @@ int timed_read(int fd, int len, char *buffer)
 		if (timeout_ms <= 0)
 			break; /* no remaining time */
 
-		#ifdef DEBUG
-			fprintf(stderr, "remaining time: %d\n", timeout_ms);
-		#endif
+		ulog("remaining time: %d\n", timeout_ms);
 
 		timeout.tv_sec = timeout_ms / 1000;
 		timeout.tv_usec = (timeout_ms % 1000) * 1000;
@@ -119,10 +133,7 @@ int timed_read(int fd, int len, char *buffer)
 
 	gettimeofday(&stop, NULL);
 
-	#ifdef DEBUG
-		fprintf(stderr, "read %d", got);
-		printf(" bytes in %d msec.\n", timeval_subtract(&stop, &start));
-	#endif
+	ulog("read %d bytes in %d msec\n", got, timeval_subtract(&stop, &start));
 
 	return got;
 }

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Wed 25 Feb 2015 09:11:49 AM IRST
+ * [] Last Modified : Tue 03 Mar 2015 12:01:24 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -31,6 +31,11 @@ void quit_command(void)
 	exit(0);
 }
 
+void open_command(const char *dev)
+{
+	open_serial(dev);
+}
+
 void init_command(void)
 {
 	init_serial();
@@ -45,10 +50,19 @@ void command_dispatcher(const char *command)
 	if (len < 1)
 		return;
 
-	if (!strcmp(verb, "quit"))
+	if (!strcmp(verb, "quit")) {
 		quit_command();
-	else if (!strcmp(verb, "init"))
+	} else if (!strcmp(verb, "open")) {
+		char dev[1024];
+		int len = 0;
+
+		len = sscanf(command, "%s %s", verb, dev);
+		if (len < 2) {
+			printf("open serial-device\n");
+			return;
+		}
+		open_command(dev);
+	} else if (!strcmp(verb, "init")) {
 		init_command();
+	}
 }
-
-

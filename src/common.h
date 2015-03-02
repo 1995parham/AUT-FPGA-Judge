@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Tue 24 Feb 2015 10:32:18 PM IRST
+ * [] Last Modified : Tue 03 Mar 2015 12:00:34 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -25,4 +25,11 @@ void ulog(const char *fmt, ...)
 void slog(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
 int timeval_subtract(const struct timeval *a, const struct timeval *b);
+
+#define TEST_FD()						\
+	do {							\
+		if (fd <= 0)					\
+			udie("Please open valid device first");	\
+	} while (0)						\
+
 #endif

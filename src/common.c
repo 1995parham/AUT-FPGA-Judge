@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Tue 24 Feb 2015 10:32:04 PM IRST
+ * [] Last Modified : Mon 02 Mar 2015 11:25:03 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -93,4 +93,3 @@ int timeval_subtract(const struct timeval *a, const struct timeval *b)
 	return (a->tv_usec - b->tv_usec) / 1000 +
 		(a->tv_sec - b->tv_sec) * 1000;
 }
-
