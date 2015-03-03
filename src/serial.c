@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 01:51:46 AM IRST
+ * [] Last Modified : Tue 03 Mar 2015 12:01:59 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -54,8 +54,8 @@ void init_serial(void)
 
 	memset(&tio, 0, sizeof(tio));
 
-	cfsetispeed(&tio, B115200);
-	cfsetospeed(&tio, B115200);
+	cfsetispeed(&tio, B9600);
+	cfsetospeed(&tio, B9600);
 	/* 8 data bits */
 	tio.c_cflag |= CS8;
 	/* local connection, no moden control */
@@ -108,6 +108,7 @@ int timed_readline(char *buffer)
 		if (select(fd + 1, &read_fds, &write_fds,
 					&except_fds, &timeout) == 1) {
 			read(fd, &buffer[got], 1);
+			got++;
 		} else {
 			printf("timeout!\n");
 			got = 0;
@@ -120,6 +121,8 @@ int timed_readline(char *buffer)
 	gettimeofday(&stop, NULL);
 
 	ulog("read %d bytes in %d msec\n", got, timeval_subtract(&stop, &start));
+
+	buffer[got] = 0;
 
 	return got;
 }
