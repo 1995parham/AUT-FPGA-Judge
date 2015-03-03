@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 12:01:59 PM IRST
+ * [] Last Modified : Tue 03 Mar 2015 09:15:50 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -125,4 +125,17 @@ int timed_readline(char *buffer)
 	buffer[got] = 0;
 
 	return got;
+}
+
+int writeline(const char *buffer)
+{
+	TEST_FD();
+
+	int put = 0;
+	
+	while (buffer[put] != 0x0a) {
+		write(fd, &buffer[get], 1);
+		get++;
+	}
+
 }
