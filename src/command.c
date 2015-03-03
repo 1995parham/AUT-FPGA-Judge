@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 12:01:24 AM IRST
+ * [] Last Modified : Tue 03 Mar 2015 10:48:25 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -17,6 +17,8 @@
 #include "command.h"
 #include "common.h"
 #include "serial.h"
+#include "tcp.h"
+#include "game.h"
 
 /*
  * Commands in this program have the following foramt
@@ -36,9 +38,19 @@ void open_command(const char *dev)
 	open_serial(dev);
 }
 
-void init_command(void)
+void init_serial_command(void)
 {
 	init_serial();
+}
+
+void init_tcp_command(const char *ip)
+{
+	connect_tcp(ip);
+}
+
+void play_command(void)
+{
+	play();
 }
 
 void command_dispatcher(const char *command)
@@ -62,7 +74,20 @@ void command_dispatcher(const char *command)
 			return;
 		}
 		open_command(dev);
-	} else if (!strcmp(verb, "init")) {
-		init_command();
-	}
+	} else if (!strcmp(verb, "init_serial")) {
+		init_serial_command();
+	} else if (!strcmp(verb, "init_tcp")) {
+		char ip[1024];
+		int len = 0;
+
+		len = sscanf(command, "%s %s", verb, ip);
+		if (len < 2) {
+			printf("init_tcp ip-address\n");
+			return;
+		}
+		init_tcp_command(ip);
+
+	} else if (!strcmp(verb, "play")) {
+		play_command();	
+	}	
 }

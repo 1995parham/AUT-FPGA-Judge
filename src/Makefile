@@ -8,7 +8,7 @@
 # =======================================
 
 P=FPGA-Judge
-OBJ=main.o common.o serial.o command.o
+OBJ=main.o common.o serial.o command.o tcp.o game.o
 LIB=
 MLIB=
 
@@ -22,11 +22,15 @@ LDLIBS=$(MLIB)
 endif
 ASFLAGS=-Wall -O0 -g
 
+CFLAGS+=-D DEBUG
+
 $(P): $(OBJ)
 	$(CC) -o $(P) $(OBJ) $(LDLIBS)
 main.o: command.h common.h
 commnad.o: commnand.h common.h serial.h
 common.o: common.h
+tcp.o: common.h tcp.h
+game.o: common.h tcp.h serial.h
 
 .PHONY: clean
 clean:
