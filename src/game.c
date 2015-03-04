@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 03-03-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 11:53:56 AM IRST
+ * [] Last Modified : Wed 04 Mar 2015 12:22:06 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -19,12 +19,17 @@
 
 void play(void)
 {
-	char move[1024];
-	recv_move(move, 1024);
-	
-	ulog("%s", move);
+	while (1) {
+		char move[1024];
+		
+		recv_move(move, 1024);
 
-	timed_readline(move);
+		ulog("TCP move : %s", move);
 
-	send_move(move);
+		timed_readline(move);
+
+		ulog("Serial move : %s", move);
+		
+		send_move(move);
+	}
 }

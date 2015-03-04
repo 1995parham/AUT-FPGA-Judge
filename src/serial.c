@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 09:15:50 PM IRST
+ * [] Last Modified : Wed 04 Mar 2015 12:23:42 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -116,7 +116,7 @@ int timed_readline(char *buffer)
 			break;
 		}	
 
-	} while (buffer[got] != 0x0a);
+	} while (buffer[got - 1] != 0x0a);
 
 	gettimeofday(&stop, NULL);
 
@@ -134,8 +134,9 @@ int writeline(const char *buffer)
 	int put = 0;
 	
 	while (buffer[put] != 0x0a) {
-		write(fd, &buffer[get], 1);
-		get++;
+		write(fd, &buffer[put], 1);
+		put++;
 	}
+	return put;
 
 }
