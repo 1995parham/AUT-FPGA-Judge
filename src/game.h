@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 03-03-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 10:42:37 AM IRST
+ * [] Last Modified : Sun 12 Apr 2015 10:39:03 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -13,6 +13,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-void play(void);
+void play(int player_no);
 
 #endif

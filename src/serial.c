@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Wed 04 Mar 2015 12:23:42 PM IRST
+ * [] Last Modified : Sun 12 Apr 2015 10:44:26 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -39,12 +39,17 @@ void set_timeout(int timeout)
 	move_timeout = timeout;
 }
 
-void init_serial(void)
+void init_serial(int player_no)
 {
 	TEST_FD();
 
 	struct termios oldtio, tio;
-	const char *init_code = "0";
+	const char *init_code;
+
+	if (player_no == 1)
+		init_code = "-W";
+	else
+		init_code = "-B";
 
 	/* ** Set serial port options ** */
 
@@ -77,7 +82,7 @@ void init_serial(void)
 int timed_readline(char *buffer)
 {
 	TEST_FD();
-	
+
 	int got = 0;
 	struct timeval start, timelimit, stop;
 	fd_set read_fds, write_fds, except_fds;
@@ -114,13 +119,14 @@ int timed_readline(char *buffer)
 			got = 0;
 			/* timeout */
 			break;
-		}	
+		}
 
 	} while (buffer[got - 1] != 0x0a);
 
 	gettimeofday(&stop, NULL);
 
-	ulog("read %d bytes in %d msec\n", got, timeval_subtract(&stop, &start));
+	ulog("read %d bytes in %d msec\n",
+			got, timeval_subtract(&stop, &start));
 
 	buffer[got] = 0;
 
@@ -132,7 +138,7 @@ int writeline(const char *buffer)
 	TEST_FD();
 
 	int put = 0;
-	
+
 	while (buffer[put] != 0x0a) {
 		write(fd, &buffer[put], 1);
 		put++;

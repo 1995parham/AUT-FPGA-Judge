@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Tue 03 Mar 2015 10:41:19 AM IRST
+ * [] Last Modified : Sun 12 Apr 2015 10:44:57 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -23,30 +23,31 @@
 
 static int fd;
 
-void init_tcp(void)
+void tcp_init(void)
 {
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 	if (fd <= 0)
-			sdie("socket()");
-
-
+		sdie("socket()");
 }
 
-void connect_tcp(const char *ip)
+void tcp_connect(const char *ip)
 {
-	init_tcp();
+	tcp_init();
+
 	struct sockaddr_in server_addr;
+
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = inet_addr(ip);
 	server_addr.sin_port = htons(1373);
-	
-	if(connect(fd, (struct sockaddr *)&server_addr,
+
+	printf("connecting to %s\n", ip);
+	if (connect(fd, (struct sockaddr *)&server_addr,
 				sizeof(server_addr)) < 0)
 		sdie("connect()");
 
 }
 
-void recv_move(char *move, int size)
+void tcp_recv_move(char *move, int size)
 {
 	TEST_FD();
 
@@ -55,7 +56,7 @@ void recv_move(char *move, int size)
 	fgets(move, size, sck);
 }
 
-void send_move(const char *move)
+void tcp_send_move(const char *move)
 {
 	TEST_FD();
 
