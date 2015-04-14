@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Sun 12 Apr 2015 11:02:46 PM IRDT
+ * [] Last Modified : Mon 13 Apr 2015 07:04:00 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -24,6 +24,7 @@
 
 static gchar *ip;
 static gchar *spath;
+static gint port;
 static gint player;
 
 
@@ -34,6 +35,8 @@ static GOptionEntry entries[] = {
 		"Trax game server ip address", "M" },
 	{ "player", 'p', 0, G_OPTION_ARG_INT, &player,
 		"Trax game player number", "N"},
+	{ "port", 'n', 0, G_OPTION_ARG_INT, &port,
+		"Trax game port number", "N"},
 	{ NULL }
 };
 
@@ -55,7 +58,7 @@ int main(int argc, char *argv[])
 	open_serial(spath);
 	init_serial(player);
 
-	tcp_connect(ip);
+	tcp_connect(ip, port);
 
 	play(player);
 }

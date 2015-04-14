@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Sun 12 Apr 2015 10:07:29 PM IRDT
+ * [] Last Modified : Mon 13 Apr 2015 07:04:14 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -13,7 +13,7 @@
 #ifndef TCP_H
 #define TCP_H
 
-void tcp_connect(const char *ip);
+void tcp_connect(const char *ip, int port);
 
 void tcp_tcp(void);
 

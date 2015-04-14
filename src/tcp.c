@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Sun 12 Apr 2015 10:44:57 PM IRDT
+ * [] Last Modified : Mon 13 Apr 2015 07:01:24 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -30,7 +30,7 @@ void tcp_init(void)
 		sdie("socket()");
 }
 
-void tcp_connect(const char *ip)
+void tcp_connect(const char *ip, int port)
 {
 	tcp_init();
 
@@ -38,7 +38,7 @@ void tcp_connect(const char *ip)
 
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = inet_addr(ip);
-	server_addr.sin_port = htons(1373);
+	server_addr.sin_port = htons(port);
 
 	printf("connecting to %s\n", ip);
 	if (connect(fd, (struct sockaddr *)&server_addr,
