@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Sun 12 Apr 2015 10:44:26 PM IRDT
+ * [] Last Modified : Mon 13 Apr 2015 06:31:41 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -47,9 +47,9 @@ void init_serial(int player_no)
 	const char *init_code;
 
 	if (player_no == 1)
-		init_code = "-W";
+		init_code = "-W\n";
 	else
-		init_code = "-B";
+		init_code = "-B\n";
 
 	/* ** Set serial port options ** */
 
@@ -59,8 +59,8 @@ void init_serial(int player_no)
 
 	memset(&tio, 0, sizeof(tio));
 
-	cfsetispeed(&tio, B9600);
-	cfsetospeed(&tio, B9600);
+	cfsetispeed(&tio, B115200);
+	cfsetospeed(&tio, B115200);
 	/* 8 data bits */
 	tio.c_cflag |= CS8;
 	/* local connection, no moden control */

@@ -21,4 +21,5 @@ set (T-REX_MAJOR_VERSION 1)
 set (T-REX_MINOR_VERSION 0)
 
 # Add personal c flags
-set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O0 -g -std=gnu11 ")
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O0 -g -std=gnu11")
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS_DEBUG} -Wall -O0 -g -std=gnu11 -D DEBUG ")
