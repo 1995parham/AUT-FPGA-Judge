@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Mon 13 Apr 2015 06:31:41 PM IRDT
+ * [] Last Modified : Thu 16 Apr 2015 08:19:55 AM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -74,9 +74,9 @@ void init_serial(int player_no)
 	/* flush */
 	write(fd, init_code, strlen(init_code));
 
-	/* at least 60s timeout for game initialization */
-	if (move_timeout < 60)
-		move_timeout = 60;
+	/* at least 10s timeout for game initialization */
+	if (move_timeout < 10)
+		move_timeout = 10;
 }
 
 int timed_readline(char *buffer)
