@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Thu 16 Apr 2015 08:19:55 AM IRDT
+ * [] Last Modified : Sat 18 Apr 2015 08:09:39 PM IRDT
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -29,7 +29,7 @@ static int fd;
 
 void open_serial(const char *dev)
 {
-	fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
+	fd = open(dev, O_RDWR | O_NOCTTY | O_NONBLOCK);
 	if (fd <= 0)
 		sdie("Unable to open %s - ", dev);
 }
@@ -84,35 +84,22 @@ int timed_readline(char *buffer)
 	TEST_FD();
 
 	int got = 0;
-	struct timeval start, timelimit, stop;
+	struct timeval timeout;
 	fd_set read_fds, write_fds, except_fds;
-
+	
 	FD_ZERO(&write_fds);
 	FD_ZERO(&except_fds);
+	FD_ZERO(&read_fds);
+	FD_SET(fd, &read_fds);
 
-	gettimeofday(&start, NULL);
-	timelimit = start;
-	timelimit.tv_sec = timelimit.tv_sec + move_timeout;
-
+	timeout.tv_sec = 0;
+	timeout.tv_usec = move_timeout * 1000;
+	
+	select(fd + 1, &read_fds, &write_fds,
+			&except_fds, &timeout);
+	
 	do {
-		struct timeval now, timeout;
-		int timeout_ms;
-
-		gettimeofday(&now, NULL);
-		timeout_ms = timeval_subtract(&timelimit, &now);
-		if (timeout_ms <= 0)
-			break; /* no remaining time */
-
-		ulog("remaining time: %d\n", timeout_ms);
-
-		timeout.tv_sec = timeout_ms / 1000;
-		timeout.tv_usec = (timeout_ms % 1000) * 1000;
-
-		FD_ZERO(&read_fds);
-		FD_SET(fd, &read_fds);
-		if (select(fd + 1, &read_fds, &write_fds,
-					&except_fds, &timeout) == 1) {
-			read(fd, &buffer[got], 1);
+		if (read(fd, &buffer[got], 1)){
 			got++;
 		} else {
 			printf("timeout!\n");
@@ -120,13 +107,7 @@ int timed_readline(char *buffer)
 			/* timeout */
 			break;
 		}
-
-	} while (buffer[got - 1] != 0x0a);
-
-	gettimeofday(&stop, NULL);
-
-	ulog("read %d bytes in %d msec\n",
-			got, timeval_subtract(&stop, &start));
+	} while (buffer[got - 1] != '\n');
 
 	buffer[got] = 0;
 
