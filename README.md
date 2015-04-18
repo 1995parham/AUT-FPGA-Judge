@@ -9,4 +9,4 @@ In this repository there is C base program for serial comminucation, in order to
 first download and run NetworkServerPlayer in OpenTrax and then run and then run this program, then
 you can connect your FPGA and play with OpenTrax.
 #Special Thanks
-* Dr.Bakhshi: who helped me with his great ideas.
+* [Dr.Bakhshi](http://ceit.aut.ac.ir/~bakhshis/): who helped me with his great ideas.
