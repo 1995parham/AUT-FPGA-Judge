@@ -32,7 +32,7 @@ class FirstPlayer(cmd.Cmd):
         print(move)
 
     def do_quit(self, arg):
-        quit()
+        quit(0)
 
 
 class SecondPlayer(cmd.Cmd):
@@ -72,7 +72,7 @@ if __name__ == '__main__':
         sck.connect((args.ip, args.port))
     except ConnectionError as e:
         print(e.args[1] + " on " + args.ip + " : " + str(args.port))
-        quit()
+        quit(1)
 
     if args.player == 'first':
         FirstPlayer(sck).cmdloop("OpenTrax NetServer Player Tester <First Player>")
