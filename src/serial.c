@@ -14,12 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdint.h>
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
-#include <sys/time.h>
-#include <sys/types.h>
 
 #include "serial.h"
 #include "common.h"
@@ -86,7 +83,7 @@ int timed_readline(char *buffer)
 	int got = 0;
 	struct timeval timeout;
 	fd_set read_fds, write_fds, except_fds;
-	
+
 	FD_ZERO(&write_fds);
 	FD_ZERO(&except_fds);
 	FD_ZERO(&read_fds);
@@ -94,12 +91,12 @@ int timed_readline(char *buffer)
 
 	timeout.tv_sec = 0;
 	timeout.tv_usec = move_timeout * 1000;
-	
+
 	select(fd + 1, &read_fds, &write_fds,
-			&except_fds, &timeout);
-	
+		&except_fds, &timeout);
+
 	do {
-		if (read(fd, &buffer[got], 1)){
+		if (read(fd, &buffer[got], 1)) {
 			got++;
 		} else {
 			printf("timeout!\n");

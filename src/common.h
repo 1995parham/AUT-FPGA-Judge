@@ -24,7 +24,6 @@ void ulog(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
 void slog(const char *fmt, ...)
 	__attribute__((format(printf, 1, 2)));
-int timeval_subtract(const struct timeval *a, const struct timeval *b);
 
 #define TEST_FD()						\
 	do {							\

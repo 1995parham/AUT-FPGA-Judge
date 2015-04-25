@@ -11,12 +11,10 @@
  * =======================================
 */
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <sys/types.h>
 
 #include "tcp.h"
 #include "common.h"
@@ -30,7 +28,7 @@ void tcp_init(void)
 		sdie("socket()");
 }
 
-void tcp_connect(const char *ip, int port)
+void tcp_connect(const char *ip, uint16_t port)
 {
 	tcp_init();
 
@@ -41,8 +39,8 @@ void tcp_connect(const char *ip, int port)
 	server_addr.sin_port = htons(port);
 
 	printf("connecting to %s\n", ip);
-	if (connect(fd, (struct sockaddr *)&server_addr,
-				sizeof(server_addr)) < 0)
+	if (connect(fd, (struct sockaddr *) &server_addr,
+		sizeof(server_addr)) < 0)
 		sdie("connect()");
 
 }
@@ -51,7 +49,7 @@ void tcp_recv_move(char *move, int size)
 {
 	TEST_FD();
 
-	FILE *sck  = fdopen(fd, "r+");
+	FILE *sck = fdopen(fd, "r+");
 
 	fgets(move, size, sck);
 }

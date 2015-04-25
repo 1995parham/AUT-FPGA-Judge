@@ -13,7 +13,9 @@
 #ifndef TCP_H
 #define TCP_H
 
-void tcp_connect(const char *ip, int port);
+#include <stdint.h>
+
+void tcp_connect(const char *ip, uint16_t port);
 
 void tcp_tcp(void);
 

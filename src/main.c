@@ -12,10 +12,8 @@
 */
 #include <glib.h>
 
-#include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "common.h"
 #include "serial.h"
@@ -23,21 +21,21 @@
 #include "game.h"
 
 static gchar *ip;
-static gchar *spath;
-static gint port;
+static gchar *dev;
+static guint16 port;
 static gint player;
 
 
 static GOptionEntry entries[] = {
-	{ "serial-path", 's', 0, G_OPTION_ARG_FILENAME, &spath,
-		"Serial device file path", "N" },
-	{ "ip-address", 'i', 0, G_OPTION_ARG_STRING, &ip,
-		"Trax game server ip address", "M" },
-	{ "player", 'p', 0, G_OPTION_ARG_INT, &player,
-		"Trax game player number", "N"},
-	{ "port", 'n', 0, G_OPTION_ARG_INT, &port,
-		"Trax game port number", "N"},
-	{ NULL }
+	{"serial-path", 's', 0, G_OPTION_ARG_FILENAME, &dev,
+		"Serial device file path",     "N"},
+	{"ip-address",  'i', 0, G_OPTION_ARG_STRING,   &ip,
+		"Trax game server ip address", "M"},
+	{"player",      'p', 0, G_OPTION_ARG_INT,      &player,
+		"Trax game player number",     "N"},
+	{"port",        'n', 0, G_OPTION_ARG_INT,      &port,
+		"Trax game port number",       "N"},
+	{NULL}
 };
 
 
@@ -52,10 +50,10 @@ int main(int argc, char *argv[])
 		g_print("option parsing failed: %s\n", error->message);
 		exit(1);
 	}
-	if (!ip || !spath || !player)
-		udie("%s", g_option_context_get_help(context, TRUE, NULL));
+	if (!ip || !dev || !player)
+		udie("%s", g_option_context_get_help(context, true, NULL));
 
-	open_serial(spath);
+	open_serial(dev);
 	init_serial(player);
 
 	tcp_connect(ip, port);

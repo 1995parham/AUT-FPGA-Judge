@@ -40,7 +40,7 @@ void udie(const char *fmt, ...)
 	vsprintf(buf, fmt, args);
 	va_end(args);
 
-	int len = strlen(buf);
+	size_t len = strlen(buf);
 
 	buf[len] = '\n';
 	buf[len + 1] = 0;
@@ -79,7 +79,7 @@ void ulog(const char *fmt, ...)
 	vsprintf(buf, fmt, args);
 	va_end(args);
 
-	int len = strlen(buf);
+	size_t len = strlen(buf);
 
 	buf[len] = '\n';
 	buf[len + 1] = 0;
@@ -88,8 +88,3 @@ void ulog(const char *fmt, ...)
 #endif
 }
 
-int timeval_subtract(const struct timeval *a, const struct timeval *b)
-{
-	return (a->tv_usec - b->tv_usec) / 1000 +
-		(a->tv_sec - b->tv_sec) * 1000;
-}
