@@ -32,7 +32,7 @@ class FirstPlayer(cmd.Cmd):
         print(move)
 
     def do_quit(self, arg):
-        quit(0)
+        return True
 
 
 class SecondPlayer(cmd.Cmd):
@@ -55,7 +55,7 @@ class SecondPlayer(cmd.Cmd):
         self.sck.send(bytes(move, 'ASCII'), 0)
 
     def do_quit(self, arg):
-        quit()
+        return True
 
 
 if __name__ == '__main__':
