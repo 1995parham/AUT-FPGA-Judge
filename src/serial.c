@@ -154,9 +154,9 @@ return got; */
 			break; // timeout
 		}
 
-		if (buffer[got] != 0x0d && buffer[got] != 0x0a) got++;
 	} while (buffer[got] != '\n');
 
+	if (buffer[got] != 0x0d && buffer[got] != 0x0a) got++;
 	gettimeofday(&stop, NULL);
 	printf("read %d bytes in %d msec.\n", got, timeval_subtract(&stop, &start));
 	return got;
