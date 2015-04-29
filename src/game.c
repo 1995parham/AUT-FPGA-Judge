@@ -20,6 +20,7 @@
 void play(int player_no)
 {
 	if (player_no == 1) {
+		while (1) {
 			char move[1024];
 
 			timed_readline(move);
@@ -32,6 +33,7 @@ void play(int player_no)
 			writeline(move);
 
 			ulog("TCP player move : %s", move);
+		}
 	} else {
 		while (1) {
 			char move[1024];
