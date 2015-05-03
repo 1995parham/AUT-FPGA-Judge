@@ -5,13 +5,12 @@
  *
  * [] Creation Date : 03-03-2015
  *
- * [] Last Modified : Sun 12 Apr 2015 10:42:48 PM IRDT
- *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
-#include <stdio.h>
-#include <stdlib.h>
+/*
+ * Copyright (c) 2015 Parham Alvani.
+*/
 
 #include "common.h"
 #include "serial.h"

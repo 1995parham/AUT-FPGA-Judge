@@ -3,14 +3,14 @@
  * ========================================
  * [] File Name : common.c
  *
- * [] Creation Date : 21-12-2014
- *
- * [] Last Modified : Mon 02 Mar 2015 11:25:03 PM IRST
+ * [] Creation Date : 12-12-2014
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
-
+/*
+ * Copyright (c) 2014 Parham Alvani.
+*/
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>

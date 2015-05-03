@@ -5,10 +5,11 @@
  *
  * [] Creation Date : 21-12-2014
  *
- * [] Last Modified : Tue 03 Mar 2015 12:00:34 AM IRST
- *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2014 Parham Alvani.
 */
 #ifndef COMMON_H
 #define COMMON_H

@@ -5,10 +5,11 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Sun 12 Apr 2015 10:36:59 PM IRDT
- *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef SERIAL_H
 #define SERIAL_H

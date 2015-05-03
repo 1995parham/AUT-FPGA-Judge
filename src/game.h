@@ -3,6 +3,19 @@
  * ========================================
  * [] File Name : game.h
  *
+ * [] Creation Date : 12-04-2015
+ *
+ * [] Created By : Parham Alvani (parham.alvani@gmail.com)
+ * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
+*/
+/*
+ * In The Name Of God
+ * ========================================
+ * [] File Name : game.h
+ *
  * [] Creation Date : 03-03-2015
  *
  * [] Last Modified : Sun 12 Apr 2015 10:39:03 PM IRDT

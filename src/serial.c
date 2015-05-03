@@ -5,10 +5,11 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Sat 18 Apr 2015 08:09:39 PM IRDT
- *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 
 #include <stdio.h>
@@ -25,10 +26,9 @@
 static int move_timeout;
 static int fd;
 
-int timeval_subtract(struct timeval *a, struct timeval *b)
+static int timeval_subtract(struct timeval *a, struct timeval *b)
 {
-	// return a-b in milliseconds
-
+	/* return a-b in milliseconds */
 	return (int) ((a->tv_usec - b->tv_usec) / 1000 + (a->tv_sec - b->tv_sec) * 1000);
 }
 
@@ -64,8 +64,8 @@ void init_serial(int player_no)
 
 	memset(&tio, 0, sizeof(tio));
 
-	cfsetispeed(&tio, B9600);
-	cfsetospeed(&tio, B9600);
+	cfsetispeed(&tio, B115200);
+	cfsetospeed(&tio, B115200);
 	/* 8 data bits */
 	tio.c_cflag |= CS8;
 	/* local connection, no modem control */
@@ -73,7 +73,7 @@ void init_serial(int player_no)
 	/* enable receiver */
 	tio.c_cflag |= CREAD;
 	/* set odd parity */
-	tio.c_cflag |= PARODD;
+	// tio.c_cflag |= PARODD;
 
 	tcsetattr(fd, TCSANOW, &tio);
 	tcflush(fd, TCIOFLUSH);

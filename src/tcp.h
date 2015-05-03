@@ -5,10 +5,11 @@
  *
  * [] Creation Date : 24-02-2015
  *
- * [] Last Modified : Mon 13 Apr 2015 07:04:14 PM IRDT
- *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
+*/
+/*
+ * Copyright (c) 2015 Parham Alvani.
 */
 #ifndef TCP_H
 #define TCP_H
