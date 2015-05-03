@@ -29,7 +29,8 @@ static int fd;
 static int timeval_subtract(struct timeval *a, struct timeval *b)
 {
 	/* return a-b in milliseconds */
-	return (int) ((a->tv_usec - b->tv_usec) / 1000 + (a->tv_sec - b->tv_sec) * 1000);
+	return (int) ((a->tv_usec - b->tv_usec) / 1000 +
+	              (a->tv_sec - b->tv_sec) * 1000);
 }
 
 void open_serial(const char *dev)
@@ -146,7 +147,8 @@ return got; */
 
 		FD_ZERO(&read_fds);
 		FD_SET(fd, &read_fds);
-		if (select(fd + 1, &read_fds, &write_fds, &except_fds, &timeout) == 1) {
+		if (select(fd + 1, &read_fds, &write_fds, &except_fds,
+			&timeout) == 1) {
 			read(fd, &buffer[got], 1);
 		} else {
 			printf("timeout!\n");
@@ -158,7 +160,8 @@ return got; */
 
 	if (buffer[got] != 0x0d && buffer[got] != 0x0a) got++;
 	gettimeofday(&stop, NULL);
-	printf("read %d bytes in %d msec.\n", got, timeval_subtract(&stop, &start));
+	printf("read %d bytes in %d msec.\n", got,
+		timeval_subtract(&stop, &start));
 	return got;
 }
 
