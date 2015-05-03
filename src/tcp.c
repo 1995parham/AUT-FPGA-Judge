@@ -33,15 +33,15 @@ void tcp_connect(const char *ip, uint16_t port)
 {
 	tcp_init();
 
-	struct sockaddr_in server_addr;
+	struct sockaddr_in server_address;
 
-	server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = inet_addr(ip);
-	server_addr.sin_port = htons(port);
+	server_address.sin_family = AF_INET;
+	server_address.sin_addr.s_addr = inet_addr(ip);
+	server_address.sin_port = htons(port);
 
 	printf("connecting to %s\n", ip);
-	if (connect(fd, (struct sockaddr *) &server_addr,
-		sizeof(server_addr)) < 0)
+	if (connect(fd, (struct sockaddr *) &server_address,
+		sizeof(server_address)) < 0)
 		sdie("connect()");
 
 }

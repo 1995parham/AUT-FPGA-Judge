@@ -49,7 +49,7 @@ void init_serial(int player_no)
 {
 	TEST_FD();
 
-	struct termios oldtio, tio;
+	struct termios old_tio, tio;
 	const char *init_code;
 
 	if (player_no == 1)
@@ -60,7 +60,7 @@ void init_serial(int player_no)
 	/* ** Set serial port options ** */
 
 	/* Backup port settings */
-	tcgetattr(fd, &oldtio);
+	tcgetattr(fd, &old_tio);
 	tcflush(fd, TCIOFLUSH);
 
 	memset(&tio, 0, sizeof(tio));
@@ -87,6 +87,7 @@ void init_serial(int player_no)
 		move_timeout = 10;
 }
 
+/* TODO improved serial timed readline */
 int timed_readline(char *buffer)
 {
 	/*

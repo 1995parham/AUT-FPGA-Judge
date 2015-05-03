@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	if (!ip || !dev || !player)
-		udie("%s", g_option_context_get_help(context, true, NULL));
+		udie("Please enter IP, Serial device and Player\n%s",
+			g_option_context_get_help(context, true, NULL));
 
 	open_serial(dev);
 	init_serial(player);
