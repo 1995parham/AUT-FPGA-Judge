@@ -22,6 +22,7 @@ void play(int player_no)
 		while (1) {
 			char move[1024];
 
+			move[0] = '\n';
 			timed_readline(move);
 
 			ulog("Serial player move : %s", move);
@@ -42,6 +43,7 @@ void play(int player_no)
 			ulog("TCP player move : %s", move);
 
 			writeline(move);
+			move[0] = '\n';
 			timed_readline(move);
 
 			ulog("Serial player move : %s", move);
