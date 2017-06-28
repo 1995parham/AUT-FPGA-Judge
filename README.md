@@ -1,6 +1,6 @@
-AUT-FPGA-Challenge
-==============
-#Introduction
+# AUT-FPGA-Challenge
+
+## Introduction
 This repository contains serial tools and some documentation about FPGA competition.
 Trax game impelementation can be found at [OpenTrax](https://github.com/1995parham/OpenTrax)
 and simple Altera RS232 comminucation
@@ -9,13 +9,13 @@ In this repository there is C base program for serial comminucation, in order to
 first download and run NetworkServerPlayer in OpenTrax and then run this program, then
 you can connect your FPGA and play with OpenTrax.
 
-#OpenTrax Testing
-In test/ directory, a python based program that can be used to test OpenTrax Net Server Player exists.
+## OpenTrax Testing
+In `test/` directory, a python based program that can be used to test OpenTrax Net Server Player exists.
 
-#Special Thanks
+## Special Thanks
 * [Dr.Bakhshi](http://ceit.aut.ac.ir/~bakhshis/): who helped me with his great ideas.
 
-#Installation
+## Installation
 ```
 cmake .
 make
